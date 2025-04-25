@@ -1,41 +1,51 @@
 {% extends 'core/base.html' %}
 
-{% block title %}{{ lead.name }}{% endblock %}
+{% block title %} {{ lead.name }} {% endblock %}
 
 {% block content %}
-    <div class="py-6 px-6 bg-orange-100">
-        <h1 class="mb-6 bg-orange-100 text-center text-xl">{{ lead.name }}</h1>
-        {% if lead.description %}
-            <div class="mt-6 flex justify-between text-xs">
-                <p class="py-4 px-2 w-full font-semibold flex justify-center"> Description </p>
-                <p class="py-4 px-2 w-full font-semibold flex justify-center">Priority</p>
-                <p class="py-4 px-2 w-full font-semibold flex justify-center">Status</p>
-                <p class="py-4 px-2 w-full font-semibold flex justify-center">Created at</p>
-                <p class="py-4 px-2 w-full font-semibold flex justify-center">Modified at</p>
-            </div>
+<div class="py-6 px-6 bg-orange-100 flex justify-center">
+    <form method="post" class="w-full max-w-2xl bg-white p-6 rounded-xl shadow-md">
+        {% csrf_token %}
+        <h1 class="text-xl font-semibold mb-6 text-center">Edit Lead</h1>
 
-            <div class="flex justify-between text-xs">
-                <p class="py-4 px-2 font-semibold flex justify-center w-full {% cycle 'bg-amber-50' '' %}">{{ lead.description }}</p>
-                <p class="py-4 px-2 font-semibold flex justify-center w-full {% cycle 'bg-amber-50' '' %}">{{ lead.get_priority_display }}</p>
-                <p class="py-4 px-2 font-semibold flex justify-center w-full {% cycle 'bg-amber-50' '' %}">{{ lead.get_status_display }}</p>
-                <p class="py-4 px-2 font-semibold flex justify-center w-full {% cycle 'bg-amber-50' '' %}">{{ lead.created_at }}</p>
-                <p class="py-4 px-2 font-semibold flex justify-center w-full {% cycle 'bg-amber-50' '' %}"">{{ lead.modified_at }}</p>
-            </div>
-        {% endif %}
-    </div>
+        <div class="mb-4">
+            <label for="name" class="block text-gray-700 font-medium mb-2">Name:</label>
+            <input type="text" id="name" name="name" value="{{ lead.name }}" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-400">
+        </div>
 
-    <div class="py-6 px-6 space-x-1 flex justify-end bg-orange-100">
-        <button class="py-1 px-3">
-            <a href=" {% url 'leads_list' %}">
-                <svg class="w-4 h-6 text-stone-600 dark:text-stone-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4"/>
-                </svg>
-            </a>
-        </button>
-        <a href=" {% url 'leads_edit' lead.id %}" class="py-1 px-3 text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-xl text-xs text-center dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800"">edit</a>
-        <a href=" {% url 'leads_delete' lead.id %}" class="py-1 px-3 rounded-xl dark:text-red-600 text-xs text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900 ">delete</a>
-    </div>
+        <div class="mb-4">
+            <label for="email" class="block text-gray-700 font-medium mb-2">Email:</label>
+            <input type="email" id="email" name="email" value="{{ lead.email }}" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-400">
+        </div>
 
+        <div class="mb-4">
+            <label for="description" class="block text-gray-700 font-medium mb-2">Description:</label>
+            <textarea id="description" name="description" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-400">{{ lead.description }}</textarea>
+        </div>
 
+        <div class="mb-4">
+            <label for="priority" class="block text-gray-700 font-medium mb-2">Priority:</label>
+            <select id="priority" name="priority" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-400">
+                <option value="low" {% if lead.priority == 'low' %}selected{% endif %}>Low</option>
+                <option value="medium" {% if lead.priority == 'medium' %}selected{% endif %}>Medium</option>
+                <option value="high" {% if lead.priority == 'high' %}selected{% endif %}>High</option>
+            </select>
+        </div>
 
-{% endblock %} 
+        <div class="mb-6">
+            <label for="status" class="block text-gray-700 font-medium mb-2">Status:</label>
+            <select id="status" name="status" class="w-full border rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-orange-400">
+                <option value="new" {% if lead.status == 'new' %}selected{% endif %}>New</option>
+                <option value="contacted" {% if lead.status == 'contacted' %}selected{% endif %}>Contacted</option>
+                <option value="won" {% if lead.status == 'won' %}selected{% endif %}>Won</option>
+                <option value="lost" {% if lead.status == 'lost' %}selected{% endif %}>Lost</option>
+            </select>
+        </div>
+
+        <div class="flex justify-between space-x-2">
+            <a href="{% url 'leads_list' %}" class="py-2 px-4 rounded-xl bg-gray-400 text-white text-xs hover:bg-gray-600">Cancel</a>
+            <button type="submit" class="py-2 px-4 rounded-xl bg-green-600 text-white text-xs hover:bg-green-800">Save Changes</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

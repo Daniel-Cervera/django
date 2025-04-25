@@ -1,28 +1,33 @@
 {% extends 'core/base.html' %}
 
-{% block title %} Leads {% endblock %}
+{% block title %}Leads{% endblock %}
 
 {% block content %}
-    <div class="py-6 px-6 bg-orange-100">
-        <h1 class="mb-6 bg-orange-100 text-center text-xl">leads</h1>
+<div class="py-6 px-6 bg-orange-100 min-h-screen">
+    <h1 class="mb-6 text-center text-xl font-semibold text-gray-800">leads</h1>
 
-        <a href="{% url 'add_lead' %}" class="inline-block py-2 px-4 bg-stone-600 rounded-xl text-xs text-slate-50">Add lead</a>
-
-        <div class="mt-6 flex justify-between text-xs">
-            <p class="py-4 px-2 w-full font-semibold">Name</p>
-            <p class="py-4 px-2 w-full font-semibold">Priority</p>
-            <p class="py-4 px-2 w-full font-semibold">Status</p>
-        </div>
-
-        {% for lead in leads %}
-        <div class="text-xs flex justify-between">
-            <p class="py-4 px-2 w-full {% cycle 'bg-amber-50' '' %}">
-                <a class="font-medium text-red-600 underline dark:text-red-600 hover:no-underline" href="{% url 'lead_detail' lead.id %}">{{ lead.name }}</a>
-            </p>
-            <p class="py-4 px-2 w-full {% cycle 'bg-amber-50' '' %}">{{ lead.get_priority_display }}</p>
-            <p class="py-4 px-2 w-full {% cycle 'bg-amber-50' '' %}">{{ lead.get_status_display }}</p>
-        </div>
-        {% endfor %}
+    <div class="flex justify-end mb-6">
+        <a href="{% url 'add_lead' %}" class="inline-block py-2 px-4 bg-stone-600 hover:bg-stone-800 text-white text-xs rounded-xl transition duration-300">Add Lead</a>
     </div>
 
-{% endblock %} 
+    <div class="grid grid-cols-3 gap-2 text-xs font-semibold mb-4 text-gray-700">
+        <p class="py-2 text-center">Name</p>
+        <p class="py-2 text-center">Priority</p>
+        <p class="py-2 text-center">Status</p>
+    </div>
+
+    {% for lead in leads %}
+    <div class="grid grid-cols-3 gap-2 text-xs text-gray-800 {% cycle 'bg-amber-50' '' %} rounded-lg mb-2">
+        <p class="py-4 px-2 text-center">
+            <a href="{% url 'lead_detail' lead.id %}" class="font-medium text-red-600 underline hover:no-underline transition duration-200">{{ lead.name }}</a>
+        </p>
+        <p class="py-4 px-2 text-center">{{ lead.get_priority_display }}</p>
+        <p class="py-4 px-2 text-center">{{ lead.get_status_display }}</p>
+    </div>
+    {% empty %}
+    <div class="text-center text-gray-500 text-xs py-6">
+        No leads found.
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
