@@ -7,22 +7,24 @@
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
-    <h1 class="text-3xl text-center font-bold bg-orange-100">
+<div class="py-4 px-6 bg-orange-100">
+    <h1 class="text-3xl text-center bg-orange-100">
         protopy
     </h1>
+</div>
 
-    <nav class="py-4 px-6 flex justify-between bg-orange-100">
+    <nav class="py-4 px-6 flex justify-start bg-orange-100">
         <a></a>
         <div class="space-x-5">
             <a href="{% url 'about' %}" class="py-2 px-4 bg-stone-600 text-xs text-slate-50 rounded-xl text-white">about</a>
                 {% if request.user.is_authenticated %}
 
-                    <a href="{% url 'dashboard' %}" class="py-2 px-4 bg-stone-600 rounded-xl text-xs text-slate-50">Dashboard</a>
-                    <a href="{% url 'leads_list' %}" class="py-2 px-4 bg-stone-600 rounded-xl text-xs text-slate-50">Leads</a>
-                    <a href="{% url 'logout' %}" class="py-2 px-4 bg-red-600 text-xs text-slate-50 rounded-xl">Log out</a>
+                    <a href="{% url 'dashboard' %}" class="py-2 px-4 bg-stone-600 rounded-xl text-xs text-slate-50">dashboard</a>
+                    <a href="{% url 'leads_list' %}" class="py-2 px-4 bg-stone-600 rounded-xl text-xs text-slate-50">leads</a>
+                    <a href="{% url 'logout' %}" class="py-2 px-4 bg-red-600 text-xs rounded-xl text-slate-50">log out</a>
                 {% else %}
-                    <a href="{% url 'login' %}" class="py-4 px-6 bg-stone-600 text-xs text-slate-50 rounded-xl text-white">Log in</a>
-                    <a href="{% url 'signup' %}" class="py-4 px-6 bg-stone-500 text-xs text-slate-50 rounded-xl">Sign up</a>
+                    <a href="{% url 'login' %}" class="py-4 px-6 bg-stone-600 text-xs text-slate-50 rounded-xl text-white">log in</a>
+                    <a href="{% url 'signup' %}" class="py-4 px-6 bg-stone-500 text-xs text-slate-50 rounded-xl">sign up</a>
                 {% endif %}
         </div>
     </nav>

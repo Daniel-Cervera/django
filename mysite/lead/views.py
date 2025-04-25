@@ -38,13 +38,12 @@ def leads_edit (request, pk):
         form = AddLeadForm(request.POST, instance=lead)
         if form.is_valid():
                     form.save()
+        messages.success(request, 'The changes was saved.')
+        return redirect('leads_list')
+    else:
+        form = AddLeadForm(instance=lead)
 
-                    messages.success(request, 'The changes was saved.')
-                    return redirect('leads_list')
-        else:
-            form = AddLeadForm
-
-        return render(request, 'lead/leads_edit.html', {
+    return render(request, 'lead/leads_edit.html', {
             'form' : form
         })
 
