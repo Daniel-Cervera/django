@@ -23,6 +23,7 @@ from userprofile.views import signup
 
 urlpatterns = [
     path('', index, name='index'),
+    path('dashboard/leads/', include('lead.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('about/', about, name='about'),
     path('log-in/', views.LoginView.as_view(template_name='userprofile/login.html'), name='login'),
