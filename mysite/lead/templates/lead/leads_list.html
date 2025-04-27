@@ -10,7 +10,7 @@
         <a href="{% url 'add_lead' %}" class="inline-block py-2 px-4 bg-stone-600 hover:bg-stone-800 text-white text-xs rounded-xl transition duration-300">+</a>
     </div>
 
-    <div class="grid grid-cols-4 gap-2 text-xs bg-stone-600 rounded-lg mb-4">
+    <div class="grid grid-cols-4 gap-2 text-xs bg-stone-600 rounded-lg">
         <p class="py-2 text-center text-slate-50">Name</p>
         <p class="py-2 text-center text-slate-50">Priority</p>
         <p class="py-2 text-center text-slate-50">Status</p>
@@ -18,21 +18,21 @@
     </div>
 
     {% for lead in leads %}
-    <div class="grid grid-cols-4 gap-2 text-xs text-gray-800 {% cycle 'bg-amber-50' '' %} rounded-lg mb-2">
+    <div class="grid grid-cols-4 gap-2 text-xs text-gray-800 {% cycle 'bg-amber-50' '' %} rounded-lg">
         <p class="py-4 px-2 text-center">
             <a class="font-medium text-red-600">{{ lead.name }}</a>
         </p>
         <p class="py-4 px-2 text-center">{{ lead.get_priority_display }}</p>
         <p class="py-4 px-2 text-center">{{ lead.get_status_display }}</p>
-        <p class="py-4 px-2 text-center flex flex-center space-x-2">
+        <p class="py-4 px-2 text-center flex justify-center space-x-8">
             <a href="{% url 'lead_detail' lead.id %}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 </svg>
             </a>              
             <a href="{% url 'leads_edit' lead.id %}">
-            <button class="py-1 px-3 rounded-xl bg-red-600 text-white text-xs hover:bg-red-800">edit</button>
+                <button class="py-1 px-3 rounded-xl bg-red-600 text-white text-xs hover:bg-red-800">edit</button>
             </a>
         </p>
     </div>
