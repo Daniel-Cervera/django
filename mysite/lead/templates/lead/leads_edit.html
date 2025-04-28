@@ -1,63 +1,64 @@
 {% extends 'core/base.html' %}
 
-{% block title %} edit lead {% endblock %}
+{% block title %} {{ lead.name }} {% endblock %}
 
 {% block content %}
 
     <div class="py-8 px-6 bg-orange-100 flex justify-center">
-        <form method="POST" action="" class="w-full max-w-xl bg-stone-400 p-6 rounded-xl shadow-md">
+        <form method="POST" action="" class="w-full max-w-xl bg-stone-600 p-6 rounded-xl shadow-md">
           {% csrf_token %}
-      
+          <h1 class="text-xl text-center text-slate-50 font-bold mt-8 mb-8">Edit - {{ lead.name }}</h1>
+
           <!-- Name -->
           <div class="mb-4">
-            <label for="name" class="block text-sm font-bold text-slate-50 mb-2">Name</label>
-            <input type="text" name="name" id="name" value="{{ lead.name }}" class="text-xs w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400">
+            <label for="name" class="px-4 py-1 block text-sm font-bold text-slate-50 mb-2">Name</label>
+            <input type="text" name="name" id="name" value="{{ lead.name }}" class="text-xs text-slate-50 w-3xs px-4 py-2 border border-gray-300 rounded-lg  focus:outline-none focus:ring-2 focus:ring-orange-400">
           </div>
       
           <!-- Email -->
           <div class="mb-4">
-            <label for="email" class="block text-sm font-bold text-slate-50 mb-2">Email</label>
-            <input type="email" name="email" id="email" value="{{ lead.email }}" class="text-xs w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-400">
-          </div>
-      
-          <!-- Description -->
-          <div class="mb-4">
-            <label for="description" class="block text-sm font-bold text-slate-50 mb-2">Description</label>
-            <textarea name="description" id="description" rows="4"
-              class="text-xs w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300">{{ lead.description }}</textarea>
+            <label for="email" class="px-4 py-1 block text-sm font-bold text-slate-50 mb-2">Email</label>
+            <input type="email" name="email" id="email" value="{{ lead.email }}" class="text-xs text-slate-50 w-3xs px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400">
           </div>
       
           <!-- Priority -->
           <div class="mb-4">
-            <label for="priority" class="block text-sm font-bold text-slate-50 mb-2">Priority</label>
+            <label for="priority" class="px-4 py-1 block text-sm font-bold text-slate-50 mb-2">Priority</label>
             <select name="priority" id="priority"
-              class="text-xs w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300">
+              class="text-xs text-slate-50 w-3xs border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300">
               <option value="low" {% if lead.priority == 'low' %}selected{% endif %}>Low</option>
               <option value="medium" {% if lead.priority == 'medium' %}selected{% endif %}>Medium</option>
               <option value="high" {% if lead.priority == 'high' %}selected{% endif %}>High</option>
             </select>
           </div>
+
+          <!-- Description -->
+          <div class="mb-4">
+            <label for="description" class="px-4 py-1 block text-sm font-bold text-slate-50 mb-2">Description</label>
+            <textarea name="description" id="description" rows="4"
+              class="text-xs text-slate-50 px-4 py-2 w-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300">{{ lead.description }}</textarea>
+          </div>
       
           <!-- Status -->
-          <div class="mb-6">
-            <label for="status" class="block text-sm font-bold text-slate-50 mb-2">Status</label>
+          <div class="mb-4">
+            <label for="status" class="px-4 py-1 block text-sm font-bold text-slate-50 mb-2">Status</label>
             <select name="status" id="status"
-              class="text-xs w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300">
+              class="text-xs text-slate-50 w-3xs border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300">
               <option value="new" {% if lead.status == 'new' %}selected{% endif %}>New</option>
               <option value="contacted" {% if lead.status == 'contacted' %}selected{% endif %}>Contacted</option>
               <option value="won" {% if lead.status == 'won' %}selected{% endif %}>Won</option>
               <option value="lost" {% if lead.status == 'lost' %}selected{% endif %}>Lost</option>
             </select>
           </div>
-      
-          <!-- Submit -->
-          <div class="flex justify-between space-x-2">
-            <a href="{% url 'leads_list' %}" class="py-1 px-3 rounded-xl bg-red-600 text-white text-xs hover:bg-red-800 transition">discard</a>
+
+          <div class="flex justify-center mt-8 space-x-2">
             <button type="submit"
-              class="bg-green-600 text-white text-xs py-1 px-3 rounded-xl hover:bg-gree-700 transition">
+              class="bg-green-600 text-white text-xs py-1 px-3 rounded-xl hover:bg-green-700 transition">
               save changes
             </button>
+            <a href="{% url 'leads_list' %}" class="py-1 px-3 rounded-xl bg-red-600 text-white text-xs hover:bg-red-800 transition">discard</a>
           </div>
+
         </form>
       </div>
 {% endblock %} 
