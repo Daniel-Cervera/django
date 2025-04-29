@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AddLeadForm
 from .models import Lead
 from client.models import Client
-# Create your views here.
+
 
 @login_required
 def leads_list(request):
@@ -47,7 +47,6 @@ def leads_edit(request, pk):
         'lead': lead,
     })
 
-
 @login_required
 def add_lead(request):
     if request.method == 'POST':
@@ -68,7 +67,6 @@ def add_lead(request):
         return redirect('leads_list')
 
     return render(request, 'lead/add_lead.html')
-
 
 @login_required
 def convert_to_client(request, pk):

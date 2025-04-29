@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block title %}clients{% endblock %}
+
+{% block content %}
+<div class="py-6 px-6 bg-orange-100 min-h-screen">
+    <h1 class="mb-6 text-center text-xl font-semibold text-gray-800">list clients</h1>
+
+    <div class="flex justify-end mb-4" title="add client">
+        <a href="{% url 'add_lead' %}" class="inline-block py-2 px-4 bg-stone-600 hover:bg-stone-800 text-white text-xs rounded-xl transition duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 gap-2 text-xs bg-stone-600 rounded-lg">
+        <p class="py-2 text-center text-slate-50">Name</p>
+    </div>
+
+    {% for cleint in clients %}
+    <div class="grid grid-cols-1 gap-2 text-xs text-gray-800 {% cycle 'bg-amber-50' '' %} rounded-lg">
+        <p class="py-4 px-2 text-center">
+            <a class="font-medium text-red-600">{{ client.name }}</a>
+        </p>
+    </div>
+    {% empty %}
+    <div class="text-center text-gray-500 text-xs py-6">
+        No clients register yet...
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
