@@ -6,24 +6,24 @@
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <title>{% block title %}{% endblock %}</title>
     </head>
-    <body>
-<div class="py-4 px-6 bg-orange-100">
-    <h1 class="text-3xl text-center bg-orange-100">
-        LAM
-    </h1>
-</div>
+    <body class="bg-orange-100">
+    <div class="py-4 px-6 bg-neutral-500">
+        <h1 class="text-3xl text-center text-slate-50">
+            LAM
+        </h1>
+    </div>
 
-    <nav class="py-4 px-6 flex justify-center bg-orange-100">
+    <nav class="py-4 px-6 flex justify-center bg-neutral-500">
         <div class="space-x-2">
-            <a href="{% url 'about' %}" class="py-2 px-4 text-center bg-stone-600 text-xs text-slate-50 rounded-xl text-white">about</a>
+            <a href="{% url 'about' %}" class="py-2 px-4 text-center bg-stone-600 hover:bg-stone-800 text-xs text-slate-50 rounded-xl text-white">about</a>
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'dashboard' %}" class="py-2 px-4 text-center bg-stone-600 rounded-xl text-xs text-slate-50">dashboard</a>
-                    <a href="{% url 'leads_list' %}" class="py-2 px-4 text-center bg-stone-600 rounded-xl text-xs text-slate-50">leads</a>
-                    <a href="{% url 'clients_list' %}" class="py-2 px-4 text-center bg-stone-600 rounded-xl text-xs text-slate-50">clients</a>
-                    <a href="{% url 'logout' %}" class="py-2 px-4  text-center bg-red-600 text-xs rounded-xl text-slate-50">log out</a>
+                    <a href="{% url 'dashboard' %}" class="py-2 px-4 text-center bg-stone-600 hover:bg-stone-800 rounded-xl text-xs text-slate-50">dashboard</a>
+                    <a href="{% url 'leads_list' %}" class="py-2 px-4 text-center bg-stone-600 hover:bg-stone-800 rounded-xl text-xs text-slate-50">leads</a>
+                    <a href="{% url 'clients_list' %}" class="py-2 px-4 text-center bg-stone-600 hover:bg-stone-800 rounded-xl text-xs text-slate-50">clients</a>
+                    <a href="{% url 'logout' %}" class="py-2 px-4  text-center bg-red-600 hover:bg-red-800 text-xs rounded-xl text-slate-50">log out</a>
                 {% else %}
-                    <a href="{% url 'login' %}" class="py-2 px-4 text-center bg-stone-600 text-xs text-slate-50 rounded-xl text-white">log in</a>
-                    <a href="{% url 'signup' %}" class="py-2 px-4 text-center bg-stone-500 text-xs text-slate-50 rounded-xl">sign up</a>
+                    <a href="{% url 'login' %}" class="py-2 px-4 text-center bg-stone-600 hover:bg-stone-800 text-xs text-slate-50 rounded-xl text-white">log in</a>
+                    <a href="{% url 'signup' %}" class="py-2 px-4 text-center bg-stone-500 hover:bg-stone-800 text-xs text-slate-50 rounded-xl">sign up</a>
                 {% endif %}
         </div>
     </nav>
